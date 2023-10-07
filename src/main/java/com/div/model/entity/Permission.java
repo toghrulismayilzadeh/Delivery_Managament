@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -20,4 +22,6 @@ public class Permission {
 
     @Column(name = "name")
     private String name;
+    @ManyToMany(mappedBy = "permissions")
+    private List<Role> roles;
 }

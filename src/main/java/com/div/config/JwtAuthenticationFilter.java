@@ -1,6 +1,6 @@
 package com.div.config;
 
-import com.div.service.UserService;
+import com.div.service.UserDetails;
 import com.div.service.JWTService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.FilterChain;
@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -22,7 +21,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JWTService jwtService;
-    private final UserService userService;
+    private final UserDetails userService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -36,7 +35,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUserName(jwt);
         if (StringUtils.isNotEmpty(userEmail) && SecurityContextHolder.getContext().getAuthentication()==null){
-            UserDetails userDetails = userService.customerDetailsService().loadUserByUsername(userEmail);
+            org.springframework.security.core.userdetails.UserDetails userDetails =
+                    userService.loadUserByUsername(userEmail);
             if(jwtService.isTokenValid(jwt,userDetails)){
                 SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(

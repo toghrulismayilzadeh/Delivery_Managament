@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(schema = "delivery",name = "customers")
+@Table(schema = "delivery",name = "user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +35,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
     @Column(name = "create_date")
-    private LocalDate creatDate;
+    private LocalDateTime creatDate;
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "location")
@@ -72,4 +73,5 @@ public class User implements UserDetails {
     public boolean credentialsNonExpired;
 
     public boolean enabled;
+
 }

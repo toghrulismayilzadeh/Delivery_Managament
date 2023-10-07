@@ -1,7 +1,7 @@
 package com.div.config;
 
 import com.div.model.enums.Type;
-import com.div.service.UserService;
+import com.div.service.UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfiguration  {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final UserService userService;
+   private final UserDetails userService;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
@@ -42,7 +42,7 @@ public class SecurityConfiguration  {
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userService.customerDetailsService());
+        authenticationProvider.setUserDetailsService(userService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }

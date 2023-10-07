@@ -22,12 +22,14 @@ public class Role {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "type")
-    private String type;
-    @Transient
-    private RoleType roleType;
+    @Column(name = "name")
+    private String name;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private List<Permission> permissions;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Permission> permissions = new ArrayList<>();
 
 }

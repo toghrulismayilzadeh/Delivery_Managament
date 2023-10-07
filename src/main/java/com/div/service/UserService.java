@@ -50,12 +50,12 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public UserDetailsService customerDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                return repository.findByEmail(email);
-            }
-        };
-    }
+//    public UserDetailsService customerDetailsService() {
+//        return new UserDetailsService() {
+//            @Override
+//            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//                return repository.findByEmail(email);
+//            }
+//        };
+//    }
 }

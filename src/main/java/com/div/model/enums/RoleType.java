@@ -1,4 +1,4 @@
-package com.div.model.entity;
+package com.div.model.enums;
 
 public enum RoleType {
     ADMIN("Admin"),

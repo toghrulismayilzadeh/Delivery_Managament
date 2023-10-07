@@ -2,6 +2,7 @@ package com.div.controller;
 
 import com.div.model.dto.DriverDto;
 import com.div.model.dto.SignUpDto;
+import com.div.model.dto.SigninDto;
 import com.div.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,16 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();}
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    @PostMapping("/signin")
+    public ResponseEntity<?> signin(@RequestBody SigninDto signinDto) {
+        log.info("Post - /signup -> request ", signinDto);
+        var response = service.signin(signinDto);
+        log.info("Post - /signup -> response -> ", response);
+        if (response==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();}
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
     @GetMapping("/confirmation/{uuid}")
     public ResponseEntity<?> confirmation (@PathVariable UUID uuid){
         log.info("Get - /signup -> request ", uuid);

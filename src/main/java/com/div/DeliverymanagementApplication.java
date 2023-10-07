@@ -1,29 +1,31 @@
 package com.div;
 
-import com.div.model.entity.Role;
-import com.div.model.entity.RoleType;
-import com.div.model.entity.User;
-import com.div.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class DeliverymanagementApplication implements CommandLineRunner {
-	@Autowired
-	private UserRepository userRepository;
+//@OpenAPIDefinition(
+//		info = @Info(title = "Delivery-Management",
+//		version = "1.0.0",
+//		description = "This project is only for learning",
+//		termsOfService = "7patik",
+//		contact = @Contact(
+//				name = "Togrul",
+//				email = "toghrul.ismayilzadeh@gmail.com"
+//		))
+//)
+public class DeliverymanagementApplication{
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(DeliverymanagementApplication.class, args);
 	}
 
 
-	@Override
-	public void run(String... args) throws Exception {
-		User adminAccount = userRepository.findByRole(Role.);
 
-	}
 }
